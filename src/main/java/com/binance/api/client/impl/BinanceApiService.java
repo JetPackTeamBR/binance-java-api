@@ -7,6 +7,7 @@ import com.binance.api.client.domain.TimeInForce;
 import com.binance.api.client.domain.account.Account;
 import com.binance.api.client.domain.account.DepositAddress;
 import com.binance.api.client.domain.account.DepositHistory;
+import com.binance.api.client.domain.account.NewOCOResponse;
 import com.binance.api.client.domain.account.NewOrderResponse;
 import com.binance.api.client.domain.account.NewOrderResponseType;
 import com.binance.api.client.domain.account.Order;
@@ -108,6 +109,15 @@ public interface BinanceApiService {
                           @Query("icebergQty") String icebergQty, @Query("newOrderRespType") NewOrderResponseType newOrderRespType,
                           @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
 
+  @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+  @POST("/api/v3/order/oco")
+  Call<NewOCOResponse> newOCO(@Query("symbol") String symbol, @Query("listClientOrderId") String listClientOrderId, @Query("side") OrderSide side, 
+                             @Query("quantity") String quantity, @Query("limitClientOrderId") String limitClientOrderId, @Query("price") String price, 
+                             @Query("limitIcebergQty") String limitIcebergQty, @Query("stopClientOrderId")String stopClientOrderId, @Query("stopPrice") String stopPrice, 
+                             @Query("stopLimitPrice")String stopLimitPrice, @Query("stopIcebergQty") String stopIcebergQty, @Query("stopLimitTimeInForce") TimeInForce stopLimitTimeInForce, 
+                             @Query("newOrderRespType") NewOrderResponseType newOrderRespType, @Query("recvWindow") Long recvWindow, @Query("timestamp") long timestamp);
+
+  
   @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
   @GET("/api/v3/order")
   Call<Order> getOrderStatus(@Query("symbol") String symbol, @Query("orderId") Long orderId,

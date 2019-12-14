@@ -3,6 +3,8 @@ package com.binance.api.client;
 import com.binance.api.client.domain.account.Account;
 import com.binance.api.client.domain.account.DepositAddress;
 import com.binance.api.client.domain.account.DepositHistory;
+import com.binance.api.client.domain.account.NewOCO;
+import com.binance.api.client.domain.account.NewOCOResponse;
 import com.binance.api.client.domain.account.NewOrder;
 import com.binance.api.client.domain.account.NewOrderResponse;
 import com.binance.api.client.domain.account.Order;
@@ -170,6 +172,15 @@ public interface BinanceApiRestClient {
    * @param order the new TEST order to submit.
    */
   void newOrderTest(NewOrder order);
+  
+  /**
+   * Send in a new OCO;
+   * 
+   * @param oco
+   *            the OCO to submit
+   * @return a response containing details about the newly placed OCO.
+   */
+  NewOCOResponse newOCO(NewOCO oco);
 
   /**
    * Check an order's status.

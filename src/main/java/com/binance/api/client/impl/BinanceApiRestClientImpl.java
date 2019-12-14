@@ -5,6 +5,8 @@ import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.account.Account;
 import com.binance.api.client.domain.account.DepositAddress;
 import com.binance.api.client.domain.account.DepositHistory;
+import com.binance.api.client.domain.account.NewOCO;
+import com.binance.api.client.domain.account.NewOCOResponse;
 import com.binance.api.client.domain.account.NewOrder;
 import com.binance.api.client.domain.account.NewOrderResponse;
 import com.binance.api.client.domain.account.Order;
@@ -139,6 +141,14 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
     executeSync(binanceApiService.newOrderTest(order.getSymbol(), order.getSide(), order.getType(),
         order.getTimeInForce(), order.getQuantity(), order.getPrice(), order.getNewClientOrderId(), order.getStopPrice(),
         order.getIcebergQty(), order.getNewOrderRespType(), order.getRecvWindow(), order.getTimestamp()));
+  }
+  
+  @Override
+  public NewOCOResponse newOCO(NewOCO oco) {
+    return executeSync(binanceApiService.newOCO(oco.getSymbol(), oco.getListClientOrderId(), oco.getSide(), 
+            oco.getQuantity(), oco.getLimitClientOrderId(), oco.getPrice(), oco.getLimitIcebergQty(), 
+            oco.getStopClientOrderId(), oco.getStopPrice(), oco.getStopLimitPrice(), oco.getStopIcebergQty(), 
+            oco.getStopLimitTimeInForce(), oco.getNewOrderRespType(), oco.getRecvWindow(), oco.getTimestamp()));
   }
 
   // Account endpoints
