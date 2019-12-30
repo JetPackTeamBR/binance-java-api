@@ -15,6 +15,7 @@ import com.binance.api.client.domain.account.Trade;
 import com.binance.api.client.domain.account.TradeHistoryItem;
 import com.binance.api.client.domain.account.WithdrawHistory;
 import com.binance.api.client.domain.account.WithdrawResult;
+import com.binance.api.client.domain.account.request.AllOrderListRequest;
 import com.binance.api.client.domain.account.request.AllOrdersRequest;
 import com.binance.api.client.domain.account.request.CancelOrderRequest;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
@@ -184,6 +185,11 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
   public OrderList getOrderListStatus(OrderListStatusRequest orderListStatusRequest) {
       return executeSync(binanceApiService.getOrderListStatus(orderListStatusRequest.getOrderListId(), orderListStatusRequest.getOrigClientOrderId(),
         orderListStatusRequest.getRecvWindow(), orderListStatusRequest.getTimestamp()));
+  }
+  
+  public List<OrderList> getAllOrderList(AllOrderListRequest allOrderListRequest) {
+      return executeSync(binanceApiService.getAllOrderList(allOrderListRequest.getFromId(), allOrderListRequest.getStartTime(), 
+        allOrderListRequest.getEndTime(), allOrderListRequest.getLimit(), allOrderListRequest.getRecvWindow(), allOrderListRequest.getTimestamp()));
   }
 
   @Override

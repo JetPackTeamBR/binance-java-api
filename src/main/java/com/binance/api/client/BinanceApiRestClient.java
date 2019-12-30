@@ -13,6 +13,7 @@ import com.binance.api.client.domain.account.Trade;
 import com.binance.api.client.domain.account.TradeHistoryItem;
 import com.binance.api.client.domain.account.WithdrawHistory;
 import com.binance.api.client.domain.account.WithdrawResult;
+import com.binance.api.client.domain.account.request.AllOrderListRequest;
 import com.binance.api.client.domain.account.request.AllOrdersRequest;
 import com.binance.api.client.domain.account.request.CancelOrderRequest;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
@@ -222,6 +223,14 @@ public interface BinanceApiRestClient {
    * @return an orderList
    */
   OrderList getOrderListStatus(OrderListStatusRequest orderListStatusRequest);
+  
+  /**
+   * Get all list os orders
+   * 
+   * @param allOrderListRequest
+   * @return
+   */
+  List<OrderList> getAllOrderList(AllOrderListRequest allOrderListRequest);
 
   /**
    * Get current account information.
