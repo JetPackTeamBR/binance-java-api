@@ -2,6 +2,9 @@ package com.binance.api.client.domain.account;
 
 import java.util.List;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.ContingencyType;
 import com.binance.api.client.domain.OCOOrderStatus;
 import com.binance.api.client.domain.OCOStatus;
@@ -91,6 +94,20 @@ public class OrderList {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+    
+    @Override
+    public String toString() {
+      return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
+          .append("orderListId", orderListId)
+          .append("contingencyType", contingencyType)
+          .append("listStatusType", listStatusType)
+          .append("listOrderStatus", listOrderStatus)
+          .append("listClientOrderId", listClientOrderId)
+          .append("transactionTime", transactionTime)
+          .append("symbol", symbol)
+          .append("orders", orders)
+          .toString();
     }
 
 }

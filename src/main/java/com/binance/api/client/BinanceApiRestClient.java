@@ -15,6 +15,8 @@ import com.binance.api.client.domain.account.WithdrawHistory;
 import com.binance.api.client.domain.account.WithdrawResult;
 import com.binance.api.client.domain.account.request.AllOrderListRequest;
 import com.binance.api.client.domain.account.request.AllOrdersRequest;
+import com.binance.api.client.domain.account.request.CancelOrderListRequest;
+import com.binance.api.client.domain.account.request.CancelOrderListResponse;
 import com.binance.api.client.domain.account.request.CancelOrderRequest;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
 import com.binance.api.client.domain.account.request.OrderListStatusRequest;
@@ -175,15 +177,6 @@ public interface BinanceApiRestClient {
    * @param order the new TEST order to submit.
    */
   void newOrderTest(NewOrder order);
-  
-  /**
-   * Send in a new OCO;
-   * 
-   * @param oco
-   *            the OCO to submit
-   * @return a response containing details about the newly placed OCO.
-   */
-  NewOCOResponse newOCO(NewOCO oco);
 
   /**
    * Check an order's status.
@@ -215,6 +208,22 @@ public interface BinanceApiRestClient {
    * @return a list of all account orders
    */
   List<Order> getAllOrders(AllOrdersRequest orderRequest);
+  
+  /**
+   * Send in a new OCO;
+   * 
+   * @param oco
+   *            the OCO to submit
+   * @return a response containing details about the newly placed OCO.
+   */
+  NewOCOResponse newOCO(NewOCO oco);
+  
+  /**
+   * Cancel an entire Order List
+   * 
+   * @return
+   */
+  CancelOrderListResponse cancelOrderList(CancelOrderListRequest cancelOrderListRequest);
   
   /**
    * Check an order list status

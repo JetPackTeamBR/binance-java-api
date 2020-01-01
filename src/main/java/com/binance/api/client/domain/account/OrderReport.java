@@ -27,6 +27,8 @@ public class OrderReport {
      */
     private String clientOrderId;
 
+    private String origClientOrderId;
+
     private Long transactTime;
 
     private String price;
@@ -77,6 +79,14 @@ public class OrderReport {
 
     public void setClientOrderId(String clientOrderId) {
         this.clientOrderId = clientOrderId;
+    }
+
+    public String getOrigClientOrderId() {
+        return origClientOrderId;
+    }
+
+    public void setOrigClientOrderId(String origClientOrderId) {
+        this.origClientOrderId = origClientOrderId;
     }
 
     public Long getTransactTime() {

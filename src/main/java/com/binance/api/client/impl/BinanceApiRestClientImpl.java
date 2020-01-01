@@ -17,6 +17,8 @@ import com.binance.api.client.domain.account.WithdrawHistory;
 import com.binance.api.client.domain.account.WithdrawResult;
 import com.binance.api.client.domain.account.request.AllOrderListRequest;
 import com.binance.api.client.domain.account.request.AllOrdersRequest;
+import com.binance.api.client.domain.account.request.CancelOrderListRequest;
+import com.binance.api.client.domain.account.request.CancelOrderListResponse;
 import com.binance.api.client.domain.account.request.CancelOrderRequest;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
 import com.binance.api.client.domain.account.request.OrderListStatusRequest;
@@ -145,14 +147,6 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
         order.getTimeInForce(), order.getQuantity(), order.getPrice(), order.getNewClientOrderId(), order.getStopPrice(),
         order.getIcebergQty(), order.getNewOrderRespType(), order.getRecvWindow(), order.getTimestamp()));
   }
-  
-  @Override
-  public NewOCOResponse newOCO(NewOCO oco) {
-    return executeSync(binanceApiService.newOCO(oco.getSymbol(), oco.getListClientOrderId(), oco.getSide(), 
-            oco.getQuantity(), oco.getLimitClientOrderId(), oco.getPrice(), oco.getLimitIcebergQty(), 
-            oco.getStopClientOrderId(), oco.getStopPrice(), oco.getStopLimitPrice(), oco.getStopIcebergQty(), 
-            oco.getStopLimitTimeInForce(), oco.getNewOrderRespType(), oco.getRecvWindow(), oco.getTimestamp()));
-  }
 
   // Account endpoints
 
@@ -180,6 +174,20 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
     return executeSync(binanceApiService.getAllOrders(orderRequest.getSymbol(),
         orderRequest.getOrderId(), orderRequest.getLimit(),
         orderRequest.getRecvWindow(), orderRequest.getTimestamp()));
+  }
+  
+  @Override
+  public NewOCOResponse newOCO(NewOCO oco) {
+    return executeSync(binanceApiService.newOCO(oco.getSymbol(), oco.getListClientOrderId(), oco.getSide(), 
+            oco.getQuantity(), oco.getLimitClientOrderId(), oco.getPrice(), oco.getLimitIcebergQty(), 
+            oco.getStopClientOrderId(), oco.getStopPrice(), oco.getStopLimitPrice(), oco.getStopIcebergQty(), 
+            oco.getStopLimitTimeInForce(), oco.getNewOrderRespType(), oco.getRecvWindow(), oco.getTimestamp()));
+  }
+  
+  public CancelOrderListResponse cancelOrderList(CancelOrderListRequest cancelOrderListRequest) {
+      return executeSync(binanceApiService.cancelOrderList(cancelOrderListRequest.getSymbol(), cancelOrderListRequest.getOrderListId(),
+            cancelOrderListRequest.getListClientOrderId(), cancelOrderListRequest.getNewClientOrderId(),
+            cancelOrderListRequest.getRecvWindow(), cancelOrderListRequest.getTimestamp()));
   }
   
   public OrderList getOrderListStatus(OrderListStatusRequest orderListStatusRequest) {
