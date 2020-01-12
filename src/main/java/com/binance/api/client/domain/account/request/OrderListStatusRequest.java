@@ -14,9 +14,8 @@ public class OrderListStatusRequest {
 
     private Long timestamp;
 
-    public OrderListStatusRequest(Long orderListId, String origClientOrderId) {
+    public OrderListStatusRequest(Long orderListId) {
         this.orderListId = orderListId;
-        this.origClientOrderId = origClientOrderId;
         this.timestamp = System.currentTimeMillis();
         this.recvWindow = BinanceApiConstants.DEFAULT_RECEIVING_WINDOW;
     }
