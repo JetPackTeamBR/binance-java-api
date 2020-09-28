@@ -3,6 +3,7 @@ package com.binance.api.client;
 import com.binance.api.client.domain.account.Account;
 import com.binance.api.client.domain.account.DepositAddress;
 import com.binance.api.client.domain.account.DepositHistory;
+import com.binance.api.client.domain.account.DustTransferResponse;
 import com.binance.api.client.domain.account.NewOCO;
 import com.binance.api.client.domain.account.NewOCOResponse;
 import com.binance.api.client.domain.account.NewOrder;
@@ -290,6 +291,12 @@ public interface BinanceApiRestClient {
    * @param addressTag Secondary address identifier for coins like XRP,XMR etc.
    */
   WithdrawResult withdraw(String asset, String address, String amount, String name, String addressTag);
+  
+  /**
+   * Conver a list of assets to BNB
+   * @param asset the list of assets to convert
+   */
+  DustTransferResponse dustTranfer(List<String> asset);
 
   /**
    * Fetch account deposit history.

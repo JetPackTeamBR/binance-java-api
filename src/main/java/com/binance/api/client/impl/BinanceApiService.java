@@ -7,6 +7,7 @@ import com.binance.api.client.domain.TimeInForce;
 import com.binance.api.client.domain.account.Account;
 import com.binance.api.client.domain.account.DepositAddress;
 import com.binance.api.client.domain.account.DepositHistory;
+import com.binance.api.client.domain.account.DustTransferResponse;
 import com.binance.api.client.domain.account.NewOCOResponse;
 import com.binance.api.client.domain.account.NewOrderResponse;
 import com.binance.api.client.domain.account.NewOrderResponseType;
@@ -181,6 +182,10 @@ public interface BinanceApiService {
   @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
   @GET("/wapi/v3/depositAddress.html")
   Call<DepositAddress> getDepositAddress(@Query("asset") String asset, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
+  
+  @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+  @POST("/sapi/v1/asset/dust")
+  Call<DustTransferResponse> dustTransfer(@Query("asset") List<String> asset, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
 
   // User stream endpoints
 

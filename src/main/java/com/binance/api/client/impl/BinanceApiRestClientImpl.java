@@ -1,10 +1,16 @@
 package com.binance.api.client.impl;
 
+import static com.binance.api.client.impl.BinanceApiServiceGenerator.createService;
+import static com.binance.api.client.impl.BinanceApiServiceGenerator.executeSync;
+
+import java.util.List;
+
 import com.binance.api.client.BinanceApiRestClient;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.account.Account;
 import com.binance.api.client.domain.account.DepositAddress;
 import com.binance.api.client.domain.account.DepositHistory;
+import com.binance.api.client.domain.account.DustTransferResponse;
 import com.binance.api.client.domain.account.NewOCO;
 import com.binance.api.client.domain.account.NewOCOResponse;
 import com.binance.api.client.domain.account.NewOrder;
@@ -33,11 +39,6 @@ import com.binance.api.client.domain.market.CandlestickInterval;
 import com.binance.api.client.domain.market.OrderBook;
 import com.binance.api.client.domain.market.TickerPrice;
 import com.binance.api.client.domain.market.TickerStatistics;
-
-import java.util.List;
-
-import static com.binance.api.client.impl.BinanceApiServiceGenerator.createService;
-import static com.binance.api.client.impl.BinanceApiServiceGenerator.executeSync;
 
 /**
  * Implementation of Binance's REST API using Retrofit with synchronous/blocking method calls.
@@ -229,6 +230,11 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
   public WithdrawResult withdraw(String asset, String address, String amount, String name, String addressTag) {
     return executeSync(binanceApiService.withdraw(asset, address, amount, name, addressTag, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
   }
+  
+  @Override
+  public DustTransferResponse dustTranfer(List<String> asset) {
+      return executeSync(binanceApiService.dustTransfer(asset, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+  }
 
   @Override
   public DepositHistory getDepositHistory(String asset) {
@@ -261,4 +267,6 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
   public void closeUserDataStream(String listenKey) {
     executeSync(binanceApiService.closeAliveUserDataStream(listenKey));
   }
+
+
 }
