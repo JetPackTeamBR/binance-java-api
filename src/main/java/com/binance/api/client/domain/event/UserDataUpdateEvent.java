@@ -23,6 +23,8 @@ public class UserDataUpdateEvent {
   private AccountUpdateEvent accountUpdateEvent;
 
   private OrderTradeUpdateEvent orderTradeUpdateEvent;
+  
+  private BalanceUpdateEvent balanceUpdateEvent;
 
   public UserDataUpdateEventType getEventType() {
     return eventType;
@@ -55,6 +57,14 @@ public class UserDataUpdateEvent {
   public void setOrderTradeUpdateEvent(OrderTradeUpdateEvent orderTradeUpdateEvent) {
     this.orderTradeUpdateEvent = orderTradeUpdateEvent;
   }
+  
+  public void setBalanceUpdateEvent(BalanceUpdateEvent balanceUpdateEvent) {
+    this.balanceUpdateEvent = balanceUpdateEvent;
+  }
+  
+  public BalanceUpdateEvent getBalanceUpdateEvent() {
+    return this.balanceUpdateEvent;  
+  }
 
   @Override
   public String toString() {
@@ -65,8 +75,10 @@ public class UserDataUpdateEvent {
       sb.append("accountUpdateEvent", accountUpdateEvent);
     } else if (eventType == UserDataUpdateEventType.ACCOUNT_POSITION_UPDATE) {
         sb.append("accountPositionUpdateEvent", accountUpdateEvent);
-    } else {
+    } else if (eventType == UserDataUpdateEventType.ORDER_TRADE_UPDATE) {
       sb.append("orderTradeUpdateEvent", orderTradeUpdateEvent);
+    } else {
+      sb.append("balanceUpdateEvent", balanceUpdateEvent);  
     }
     return sb.toString();
   }
@@ -74,7 +86,8 @@ public class UserDataUpdateEvent {
   public enum UserDataUpdateEventType {
     ACCOUNT_UPDATE("outboundAccountInfo"),
     ACCOUNT_POSITION_UPDATE("outboundAccountPosition"),
-    ORDER_TRADE_UPDATE("executionReport");
+    ORDER_TRADE_UPDATE("executionReport"),
+    BALANCE_UPDATE("balanceUpdate");
 
     private final String eventTypeId;
 
@@ -93,6 +106,8 @@ public class UserDataUpdateEvent {
         return ORDER_TRADE_UPDATE;
       } else if (ACCOUNT_POSITION_UPDATE.eventTypeId.equals(eventTypeId)) {
         return ACCOUNT_POSITION_UPDATE;
+      } else if (BALANCE_UPDATE.eventTypeId.equals(eventTypeId)) {
+        return BALANCE_UPDATE;
       }
       throw new IllegalArgumentException("Unrecognized user data update event type id: " + eventTypeId);
     }
